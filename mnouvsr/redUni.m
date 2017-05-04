@@ -1,4 +1,14 @@
-function solution = redUni(fname, a, b, delta, epsilon, k_max)
+%% Método numérico de otimização de Redução Unilateral para uma variável sem restrição
+%
+% Uso:
+%
+%		[solution fsolution e k tf] = redUni(fname, a, b, delta, epsilon, k_max);
+%
+% Exemplo, usar como método numérico de otimização:
+%
+%		[x fx] = redUni(@f, 0, 2, 1e-3, 1e-5, 150);
+%
+function [solution fsolution e k tf] = redUni(fname, a, b, delta, epsilon, k_max)
 	tic();
 	if a >= b
 		error('a must be lesser than b!!!');
@@ -23,10 +33,8 @@ function solution = redUni(fname, a, b, delta, epsilon, k_max)
 			error('max number of iteration exceeded!!!');
 		end;
 	end;
-	solution = x(k);
 	tf = toc();
-	disp(['   x* = ' num2str(solution)]);
-	disp(['   e  = ' num2str(abs(fx(k) - fx(k - 1)))]);
-	disp(['   k  = ' num2str(k)]);
-	disp(['   tf = ' num2str(tf)]);
+	solution = x(k);
+	fsolution = fx(k);
+	e = abs(fx(k + 1) - fx(k));
 end

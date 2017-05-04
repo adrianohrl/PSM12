@@ -1,4 +1,14 @@
-function solution = redBi(fname, a, b, epsilon, k_max)
+%% Método numérico de otimização de Redução Bilateral para uma variável sem restrição
+%
+% Uso:
+%
+%		[solution fsolution e k tf] = redBi(fname, a, b, epsilon, k_max);
+%
+% Exemplo, usar como método numérico de otimização:
+%
+%		[x fx] = redBi(@f, 0, 2, 1e-5, 150);
+%
+function [solution fsolution e k tf] = redBi(fname, a, b, epsilon, k_max)
 	tic();
 	if a >= b
 		error('a must be lesser than b!!!');
@@ -25,10 +35,8 @@ function solution = redBi(fname, a, b, epsilon, k_max)
 			error('max number of iteration exceeded!!!');
 		end;
 	end;
-	solution = x0;
 	tf = toc();
-	disp(['   x* = ' num2str(solution)]);
-	disp(['   e  = ' num2str(abs(b - a))]);
-	disp(['   k  = ' num2str(k)]);
-	disp(['   tf = ' num2str(tf)]);
+	solution = x0;
+	fsolution = fx0;
+	e = abs(b - a);
 end

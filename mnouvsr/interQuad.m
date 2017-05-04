@@ -1,4 +1,14 @@
-function solution = interQuad(fname, a, b, epsilon, k_max)
+%% Método numérico de otimização de Interpolação Quadrática para uma variável sem restrição
+%
+% Uso:
+%
+%		[solution fsolution e k tf] = interQuad(fname, a, b, epsilon, k_max)
+%
+% Exemplo:
+%
+%		[x fx] = interQuad(@f, 0, 2, 1e-5, 150);
+%
+function [solution fsolution e k tf] = interQuad(fname, a, b, epsilon, k_max)
 	tic();
 	if a >= b
 		error('a must be lesser than b!!!');
@@ -41,10 +51,8 @@ function solution = interQuad(fname, a, b, epsilon, k_max)
 			error('max number of iterations exceeded!!!');
 		end;
 	end;
-	solution = xs;
 	tf = toc();
-	disp(['   x* = ' num2str(solution)]);
-	disp(['   e  = ' num2str(abs(fxs - hxs))]);
-	disp(['   k  = ' num2str(k)]);
-	disp(['   tf = ' num2str(tf)]);
+	solution = xs;
+	fsolution = fxs;
+	e = abs(fxs - hxs);
 end
