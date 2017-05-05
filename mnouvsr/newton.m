@@ -6,7 +6,7 @@
 %
 % Exemplo, usar como método numérico de otimização:
 %
-%		[x fx] = newton(@f, @df, 2, 1e-5, 150);
+%		[x fx] = newton(@df, @d2f, 2, 1e-5, 150);
 %
 function [solution fsolution e k tf msg] = newton(fname, dfname, x0, epsilon, k_max)
 	tic();

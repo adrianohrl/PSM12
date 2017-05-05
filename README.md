@@ -27,6 +27,13 @@ A função objetivo e suas derivadas de primeira e segunda ordens são definidas
 
 ### [mnomvsr](https://github.com/adrianohrl/PSM12/blob/master/mnomvsr): métodos numéricos de otimização para multíplas variáveis sem restrição
 
-Este [arquivo](https://github.com/adrianohrl/PSM12/blob/master/mnoumsr/comparacao.m) faz comparação e mostra como usar os seguintes métodos numéricos de otimização:
+Este [arquivo](https://github.com/adrianohrl/PSM12/blob/master/mnomvsr/comparacao.m) faz comparação e mostra como usar os seguintes métodos numéricos de otimização:
 
 - [Método de Máxima Declividade](https://github.com/adrianohrl/PSM12/blob/master/mnomvsr/maxDecl.m)
+- [Método de Máxima Declividade para função Quadrática](https://github.com/adrianohrl/PSM12/blob/master/mnomvsr/maxDeclQuad.m)
+- [Método de Newton](https://github.com/adrianohrl/PSM12/blob/master/mnomvsr/newton.m)
+- [Método Quasi-Newton](https://github.com/adrianohrl/PSM12/blob/master/mnomvsr/quasiNewton.m)
+- [Método dos Gradientes Conjugados](https://github.com/adrianohrl/PSM12/blob/master/mnomvsr/gc.m)
+- [Método dos Gradientes Conjugados para função Quadrática](https://github.com/adrianohrl/PSM12/blob/master/mnomvsr/gcQuad.m)
+
+A função multi-variável objetivo, seu gradiente e sua hessiana são definidos, respectivamente, nos arquivos [f.m](https://github.com/adrianohrl/PSM12/blob/master/mnomvsr/f.m), [gf.m](https://github.com/adrianohrl/PSM12/blob/master/mnomvsr/gf.m) e [hf.m](https://github.com/adrianohrl/PSM12/blob/master/mnomvsr/hf.m).

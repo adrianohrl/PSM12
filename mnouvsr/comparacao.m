@@ -26,7 +26,7 @@ try
 	disp(['     tf  = ' num2str(tf)]);
 catch err
 	warning(err.identifier, err.message);
-end
+end;
 disp('');
 
 disp('Testando o método de Redução Bilateral:');
