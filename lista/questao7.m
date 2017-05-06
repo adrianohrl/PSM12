@@ -26,20 +26,20 @@ xlabel('amostra');
 ylabel('valor');
 grid on;
 
-l = @(theta) l_nt(theta, a, b, x);
-gl = @(theta) gl_nt(theta, a, b, x);
+l = @(theta) -l_nt(theta, a, b, x);
+gl = @(theta) -gl_nt(theta, a, b, x);
 theta0 = [mean(x); var(x)];
 epsilon = 1e-3;
 k_max = 1000;
-a_mu = -1.5; a_sigma2 = 0;
-b_mu = 13.5; b_sigma2 = 15;
+a_mu = -1; a_sigma2 = epsilon;
+b_mu = 1; b_sigma2 = 1;
 tam = 100;
 mu = linspace(a_mu, b_mu, tam);
 sigma2 = linspace(a_sigma2, b_sigma2, tam);
 llf = zeros(tam);
 for i = 1 : tam
 	for j = 1 : tam
-		llf(i, j) = l([mu(i); sigma2(j)]);
+		llf(i, j) = -l([mu(i); sigma2(j)]);
 	end;
 end;
 figure;
