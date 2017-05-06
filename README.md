@@ -11,7 +11,7 @@ Este repositório contém o código fonte (para o [Octave](https://www.gnu.org/s
 
 ***
 
-### [mnouvsr](#mnouvsr): métodos numéricos de otimização para uma variável sem restrição
+### [mnouvsr](https://github.com/adrianohrl/PSM12/blob/master/mnouvsr): métodos numéricos de otimização para uma variável sem restrição
 
 Este [arquivo](https://github.com/adrianohrl/PSM12/blob/master/mnouvsr/comparacao.m) faz comparação e mostra como usar os seguintes métodos numéricos de otimização:
 

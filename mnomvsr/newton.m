@@ -28,6 +28,9 @@ function [solution fsolution e k tf] = newton(fname, gfname, x0, epsilon_f, epsi
 	tf = toc();
 	solution = x(:, k);
 	fsolution = feval(fname, solution);
-	e = min([norm(fx) norm(x(:, k) - x(:, k - 1))]);
+	e = norm(fx);
+	if k > 1 
+		e = min([e norm(x(:, k) - x(:, k - 1))]);
+	end;
 	k = k - 1;
 end

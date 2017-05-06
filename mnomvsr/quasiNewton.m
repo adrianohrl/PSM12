@@ -32,6 +32,9 @@ function [solution fsolution e k tf] = quasiNewton(fname, gfname, x0, alpha, eps
 	tf = toc();
 	solution = x(:, k);
 	fsolution = feval(fname, solution);
-	e = min([norm(gfx) norm(x(:, k) - x(:, k - 1))]);
+	e = norm(gfx);
+	if k > 1 
+		e = min([e norm(x(:, k) - x(:, k - 1))]);
+	end;
 	k = k - 1;
 end

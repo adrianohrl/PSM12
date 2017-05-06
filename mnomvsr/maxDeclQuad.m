@@ -28,6 +28,9 @@ function [solution fsolution e k tf alpha] = maxDeclQuad(Q, c, x0, epsilon_f, ep
 	tf = toc();
 	solution = x(:, k);
 	fsolution = 0.5 * solution' * Q * solution - c' * solution;
-	e = min([norm(gfx) norm(x(:, k) - x(:, k - 1))]);
+	e = norm(gfx);
+	if k > 1 
+		e = min([e norm(x(:, k) - x(:, k - 1))]);
+	end;
 	k = k - 1;
 end
