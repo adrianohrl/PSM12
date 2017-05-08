@@ -29,7 +29,7 @@ function [solution fsolution e k tf] = redUni(fname, a, b, delta, epsilon, k_max
 			error('it has run throw all the interval but it did not found any optimal point!!!');
 		end;
 		k = k + 1;
-		if k == k_max 
+		if k > k_max 
 			error('max number of iteration exceeded!!!');
 		end;
 	end;

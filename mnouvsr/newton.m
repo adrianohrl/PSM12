@@ -17,7 +17,7 @@ function [solution fsolution e k tf msg] = newton(fname, dfname, x0, epsilon, k_
 		dfx = feval(dfname, x);
 		x = x - fx / dfx;
 		k = k + 1;
-		if k == k_max 
+		if k > k_max 
 			error('max number of iteration exceeded!!!');
 		end;
 		fx = feval(fname, x);

@@ -26,7 +26,7 @@ function [solution fsolution e k tf alpha] = maxDecl(fname, gfname, x0, epsilon_
 		if norm(x(:, k) - x(:, k - 1)) <= epsilon_x
 			break;
 		end;
-		if k == k_max 
+		if k > k_max 
 			error('max number of iteration exceeded!!!');
 		end;
 		gfx = feval(gfname, x(:, k));

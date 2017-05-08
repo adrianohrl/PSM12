@@ -31,7 +31,7 @@ function [solution fsolution e k tf] = redBi(fname, a, b, epsilon, k_max)
 			b = x2;
 		end;
 		k = k + 1;
-		if k == k_max 
+		if k > k_max 
 			error('max number of iteration exceeded!!!');
 		end;
 	end;

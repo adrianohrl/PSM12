@@ -20,7 +20,7 @@ function [solution fsolution e k tf alpha] = maxDeclQuad(Q, c, x0, epsilon_f, ep
 		if norm(x(:, k) - x(:, k - 1)) <= epsilon_x
 			break;
 		end;
-		if k == k_max 
+		if k > k_max 
 			error('max number of iteration exceeded!!!');
 		end;
 		gfx = Q * x(:, k) - c;

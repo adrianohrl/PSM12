@@ -1,4 +1,4 @@
-%% Método numérico de otimização de Máxima Declividade para múltiplas variáveis sem restrição
+%% Método numérico de otimização Quasi Newton para múltiplas variáveis sem restrição
 %
 % Uso:
 %
@@ -6,7 +6,7 @@
 %
 % Exemplo:
 %				
-%		[x fx] = quasiNewton(@f, @gf, [-2; 2], 0.75, 1e-4, 1e-5, 150, @(fname, a, b) redUni(fname, a, b, 1e-4, 1e-3, 100));
+%		[x fx] = quasiNewton(@f, @gf, [-2; 2], 0.75, 1e-4, 1e-5, 150);
 %
 function [solution fsolution e k tf] = quasiNewton(fname, gfname, x0, alpha, epsilon_f, epsilon_x, k_max)
 	tic();
@@ -14,8 +14,8 @@ function [solution fsolution e k tf] = quasiNewton(fname, gfname, x0, alpha, eps
 		error('alpha must be inside the (0, 1] interval!!!');
 	end;
 	x(:, 1) = x0;
-	D = eye(length(x0));
 	gfx = feval(gfname, x0);
+	D = eye(length(x0));
 	k = 1;
 	while norm(gfx) > epsilon_f
 		x(:, k + 1) = x(:, k) - alpha * D * gfx;
@@ -23,11 +23,11 @@ function [solution fsolution e k tf] = quasiNewton(fname, gfname, x0, alpha, eps
 		if norm(x(:, k) - x(:, k - 1)) <= epsilon_x
 			break;
 		end;
-		if k == k_max 
+		if k > k_max 
 			error('max number of iteration exceeded!!!');
 		end;
-		D = bfgs(gfname, x(:, k), x(:, k - 1), D);
 		gfx = feval(gfname, x(:, k));
+		D = invBFGS(gfname, x(:, k), x(:, k - 1), D);
 	end;
 	tf = toc();
 	solution = x(:, k);

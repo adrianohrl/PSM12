@@ -11,7 +11,7 @@ a1 = a2 = -4;
 b1 = b2 = 4;
 
 epsilon = 1e-5;
-k_max = 500;
+k_max = 100;
 tam = 50;
 x1 = linspace(a1, b1, tam);
 x2 = linspace(a2, b2, tam);
@@ -141,5 +141,57 @@ if ~isempty(Q) && ~isempty(c)
 	end;
 	disp('');
 end;
+
+disp('Testando o método da Região de Confiança usando o método do ponto de Cauchy:');
+try
+	[solution fsolution e k tf] = regConf(@f, @gf, x0, 0.2, 0.0001, 1, epsilon, k_max, @pontoCauchy);
+	disp(['     x*  = [' num2str(solution(1)) '; ' num2str(solution(2)) ']']);
+	disp(['   f(x*) = ' num2str(fsolution)]);
+	disp(['     e   = ' num2str(e)]);
+	disp(['     k   = ' num2str(k)]);
+	disp(['     tf  = ' num2str(tf)]);
+catch err
+	disp(['  error: ' err.message]);
+end;
+disp('');
+
+disp('Testando o método da Região de Confiança usando o método de passo de Newton:');
+try
+	[solution fsolution e k tf] = regConf(@f, @gf, x0, 0.2, 0.5, 1, epsilon, k_max, @passoNewton);
+	disp(['     x*  = [' num2str(solution(1)) '; ' num2str(solution(2)) ']']);
+	disp(['   f(x*) = ' num2str(fsolution)]);
+	disp(['     e   = ' num2str(e)]);
+	disp(['     k   = ' num2str(k)]);
+	disp(['     tf  = ' num2str(tf)]);
+catch err
+	disp(['  error: ' err.message]);
+end;
+disp('');
+
+disp('Testando o método da Região de Confiança usando o método Dog Leg com o método de Redução Bilateral:');
+try
+	[solution fsolution e k tf] = regConf(@f, @gf, x0, 0.2, 0.5, 1, epsilon, k_max, @(gfx, hfx, delta) dogleg(gfx, hfx, delta, @(fname, a, b) redBi(fname, a, b, epsilon, k_max)));
+	disp(['     x*  = [' num2str(solution(1)) '; ' num2str(solution(2)) ']']);
+	disp(['   f(x*) = ' num2str(fsolution)]);
+	disp(['     e   = ' num2str(e)]);
+	disp(['     k   = ' num2str(k)]);
+	disp(['     tf  = ' num2str(tf)]);
+catch err
+	disp(['  error: ' err.message]);
+end;
+disp('');
+
+disp('Testando o método da Região de Confiança usando o método Dog Leg com o método de Interpolação Quadrática:');
+try
+	[solution fsolution e k tf] = regConf(@f, @gf, x0, 0.2, 0.5, 1, epsilon, k_max, @(gfx, hfx, delta) dogleg(gfx, hfx, delta, @(fname, a, b) interQuad(fname, a, b, epsilon, k_max)));
+	disp(['     x*  = [' num2str(solution(1)) '; ' num2str(solution(2)) ']']);
+	disp(['   f(x*) = ' num2str(fsolution)]);
+	disp(['     e   = ' num2str(e)]);
+	disp(['     k   = ' num2str(k)]);
+	disp(['     tf  = ' num2str(tf)]);
+catch err
+	disp(['  error: ' err.message]);
+end;
+disp('');
 
 rmpath('../mnouvsr');

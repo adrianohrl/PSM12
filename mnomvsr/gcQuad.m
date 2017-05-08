@@ -18,7 +18,7 @@ function [solution fsolution e k tf alpha] = gcQuad(Q, c, x0, epsilon, k_max)
 		alpha(k) = - (r' * d) / (d' * Q * d);
 		x = x + alpha(k) * d;
 		k = k + 1;
-		if k == k_max 
+		if k > k_max 
 			error('max number of iteration exceeded!!!');
 		end;
 		r = Q * x - c;

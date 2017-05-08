@@ -6,8 +6,8 @@ close all;
 % está função não é possível ser escrita na forma quadrática
 name = 'de Rosenbrock';
 x0 = [0.9; 0.9];
-a1 = a2 = -2;
-b1 = 2; b2 = 6;
+a1 = a2 = -5;
+b1 = 5; b2 = 6;
 
 epsilon = 1e-5;
 k_max = 500;
@@ -105,6 +105,58 @@ try
 	disp(['     k   = ' num2str(k)]);
 	disp(['     tf  = ' num2str(tf)]);
 	disp(['   alpha = [' num2str(alpha) ']']);
+catch err
+	disp(['  error: ' err.message]);
+end;
+disp('');
+
+disp('Método da Região de Confiança usando o método do ponto de Cauchy:');
+try
+	[solution fsolution e k tf] = regConf(@f, @gf, x0, 0.2, 2, 5, epsilon, k_max, @pontoCauchy);
+	disp(['     x*  = [' num2str(solution(1)) '; ' num2str(solution(2)) ']']);
+	disp(['   f(x*) = ' num2str(fsolution)]);
+	disp(['     e   = ' num2str(e)]);
+	disp(['     k   = ' num2str(k)]);
+	disp(['     tf  = ' num2str(tf)]);
+catch err
+	disp(['  error: ' err.message]);
+end;
+disp('');
+
+disp('Método da Região de Confiança usando o método de passo de Newton:');
+try
+	[solution fsolution e k tf] = regConf(@f, @gf, x0, 0.2, 2, 5, epsilon, k_max, @passoNewton);
+	disp(['     x*  = [' num2str(solution(1)) '; ' num2str(solution(2)) ']']);
+	disp(['   f(x*) = ' num2str(fsolution)]);
+	disp(['     e   = ' num2str(e)]);
+	disp(['     k   = ' num2str(k)]);
+	disp(['     tf  = ' num2str(tf)]);
+catch err
+	disp(['  error: ' err.message]);
+end;
+disp('');
+
+disp('Método da Região de Confiança usando o método Dog Leg com o método de Redução Bilateral:');
+try
+	[solution fsolution e k tf] = regConf(@f, @gf, x0, 0.2, 2, 5, epsilon, k_max, @(gfx, hfx, delta) dogleg(gfx, hfx, delta, @(fname, a, b) redBi(fname, a, b, epsilon, k_max)));
+	disp(['     x*  = [' num2str(solution(1)) '; ' num2str(solution(2)) ']']);
+	disp(['   f(x*) = ' num2str(fsolution)]);
+	disp(['     e   = ' num2str(e)]);
+	disp(['     k   = ' num2str(k)]);
+	disp(['     tf  = ' num2str(tf)]);
+catch err
+	disp(['  error: ' err.message]);
+end;
+disp('');
+
+disp('Método da Região de Confiança usando o método Dog Leg com o método de Interpolação Quadrática:');
+try
+	[solution fsolution e k tf] = regConf(@f, @gf, x0, 0.2, 2, 5, epsilon, k_max, @(gfx, hfx, delta) dogleg(gfx, hfx, delta, @(fname, a, b) interQuad(fname, a, b, epsilon, k_max)));
+	disp(['     x*  = [' num2str(solution(1)) '; ' num2str(solution(2)) ']']);
+	disp(['   f(x*) = ' num2str(fsolution)]);
+	disp(['     e   = ' num2str(e)]);
+	disp(['     k   = ' num2str(k)]);
+	disp(['     tf  = ' num2str(tf)]);
 catch err
 	disp(['  error: ' err.message]);
 end;

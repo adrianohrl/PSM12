@@ -22,7 +22,7 @@ function [solution fsolution e k tf] = quasiNewton(fname, delta_x, x0, epsilon, 
 		end;
 		x = x - delta_x ^ 2 * dfx / (_fx - 2 * fx + fx_);
 		k = k + 1;
-		if k == k_max 
+		if k > k_max 
 			error('max number of iteration exceeded!!!');
 		end;
 	end;

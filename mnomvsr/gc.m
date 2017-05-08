@@ -25,7 +25,7 @@ function [solution fsolution e k tf alpha] = gc(fname, gfname, x0, epsilon, k_ma
 		alpha(k) = feval(fminname, @(alpha) f_alpha(fname, x, alpha, d), 0, 1);
 		x = x + alpha(k) * d;
 		k = k + 1;
-		if k == k_max 
+		if k > k_max 
 			error('max number of iteration exceeded!!!');
 		end;
 		fdx = feval(gfname, x);
