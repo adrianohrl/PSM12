@@ -47,9 +47,9 @@ function [solution fsolution e k tf] = regConf(fname, gfname, x0, eta1, delta0, 
 		delta_x = feval(method, gfx, hfx, delta);
 		rho = (fx - feval(fname, x + delta_x)) / (m(fx, gfx, hfx, m0) - m(fx, gfx, hfx, delta_x));
 		if rho < eta2
-			delta = t1 * delta;
+			delta = t1 * norm(delta_x);
 		elseif rho > eta3 && norm(delta_x) == delta
-			delta = min(t2 * delta, delta_max)
+			delta = min(t2 * delta, delta_max);
 		end;
 		if rho > eta1
 			x = x + delta_x;
